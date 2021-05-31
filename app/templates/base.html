@@ -1,0 +1,73 @@
+<html>
+    <head>
+
+        <link rel="stylesheet" href="styles.css">
+
+        <style>
+            * {
+                font-family: Verdana;
+
+                /*
+                color:  #333333;
+                text-align: center;
+                */
+                /*Verdana Helvetica/Arial
+                Source Sans Pro - doesn't work
+                Segoe UI
+                Verdana
+                Arial
+                background-color: white;
+                */
+            }
+            h1 {
+                font-family: Segoe UI;
+            }
+            footer {
+                font-size: 50%;
+
+                position: fixed;
+                bottom: 8;
+
+                text-align: center;
+                /* And if you want the div to be full-width: */
+                left: 0;
+                right: 0;
+
+            }
+
+        </style>
+
+        {% if title %}
+        <title>Colba - {{ title }}</title>
+        {% else %}
+        <title>You're going to hell</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            Colba:
+            <a href="{{ url_for('index') }}">Home</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+
+    <footer> 
+        &copy dolgopolov ilya 2021-2021. All Right Reserved.   
+    </footer>
+
+    </body>
+</html>
